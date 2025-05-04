@@ -1,35 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Metadata } from 'next';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import ProductCard from '@/components/product/ProductCard';
 
-// Define product type for better type safety
-type ProductColor = {
-  name: string;
-  hex: string;
-};
-
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-  category: string;
-  description: string;
-  features: string[];
-  sizes: string[];
-  colors: ProductColor[];
-  imageSrc: string;
-  additionalImages: string[];
-  isNew?: boolean;
-  rating: number;
-  reviewCount: number;
-};
-
 // Sample product data
-const products: Record<string, Product> = {
+const products = {
   'velocity-pro-tee': {
     id: 'velocity-pro-tee',
     name: 'Velocity Pro Tee',
@@ -93,52 +70,8 @@ const products: Record<string, Product> = {
   // Additional products would be added here
 };
 
-// Define simplified product type for related products
-type RelatedProduct = {
-  id: string;
-  name: string;
-  price: number;
-  category: string;
-  imageSrc: string;
-  colors: number | ProductColor[];
-  isNew?: boolean;
-};
-
-// Generate metadata for the product page
-export function generateMetadata({ params }: { params: { id: string } }): Metadata {
-  // Get the product ID from params
-  const { id } = params;
-
-  // Find the product by id
-  const product = Object.values(products).find(p => p.id === id);
-
-  if (!product) {
-    return {
-      title: 'Product Not Found | Lightspeed',
-      description: 'The product you are looking for could not be found.',
-    };
-  }
-
-  return {
-    title: `${product.name} | Lightspeed Performance Gear`,
-    description: product.description.substring(0, 160),
-    openGraph: {
-      title: `${product.name} | Lightspeed Performance Gear`,
-      description: product.description.substring(0, 160),
-      images: [
-        {
-          url: product.imageSrc,
-          width: 1200,
-          height: 630,
-          alt: product.name,
-        },
-      ],
-    },
-  };
-}
-
 // Sample related products
-const relatedProducts: RelatedProduct[] = [
+const relatedProducts = [
   {
     id: 'sprint-compression-tights',
     name: 'Sprint Compression Tights',
@@ -167,11 +100,25 @@ const relatedProducts: RelatedProduct[] = [
   },
 ];
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  // Get the product ID from params
-  const { id } = params;
+export function generateMetadata({ params }) {
+  const id = params.id;
+  const product = Object.values(products).find(p => p.id === id);
+  
+  if (!product) {
+    return {
+      title: 'Product Not Found | Lightspeed',
+      description: 'The product you are looking for could not be found.',
+    };
+  }
+  
+  return {
+    title: `${product.name} | Lightspeed Performance Gear`,
+    description: product.description.substring(0, 160),
+  };
+}
 
-  // Find the product by id in a type-safe way
+export default function ProductDetailPage({ params }) {
+  const id = params.id;
   const product = Object.values(products).find(p => p.id === id);
 
   if (!product) {
@@ -339,9 +286,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                   <input
                     type="number"
                     min="1"
-                    value="1"
+                    defaultValue="1"
                     className="w-12 h-12 bg-transparent text-center text-ls-white border-x border-gray-600 focus:outline-none"
-                    readOnly
                   />
                   <button className="w-12 h-12 flex items-center justify-center text-ls-white hover:text-ls-neon">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
