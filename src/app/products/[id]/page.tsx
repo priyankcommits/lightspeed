@@ -105,9 +105,9 @@ type RelatedProduct = {
 };
 
 // Generate metadata for the product page
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  // Await the params to ensure they're fully resolved
-  const id = await params.id;
+export function generateMetadata({ params }: { params: { id: string } }): Metadata {
+  // Get the product ID from params
+  const { id } = params;
 
   // Find the product by id
   const product = Object.values(products).find(p => p.id === id);
@@ -167,9 +167,9 @@ const relatedProducts: RelatedProduct[] = [
   },
 ];
 
-export default async function ProductDetailPage({ params }: { params: { id: string } }) {
-  // Await the params to ensure they're fully resolved
-  const id = await params.id;
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  // Get the product ID from params
+  const { id } = params;
 
   // Find the product by id in a type-safe way
   const product = Object.values(products).find(p => p.id === id);
