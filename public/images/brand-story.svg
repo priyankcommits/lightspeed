@@ -1,0 +1,8 @@
+<svg width="800" height="1000" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="1000" fill="#1E1E1E"/>
+  <text x="400" y="480" font-family="Arial" font-size="32" fill="#FFFFFF" text-anchor="middle">ATHLETE IN ACTION</text>
+  <text x="400" y="530" font-family="Arial" font-size="24" fill="#00FF66" text-anchor="middle">Lightspeed Brand Story</text>
+  <rect x="250" y="600" width="300" height="200" fill="#2A2A2A" rx="10" ry="10"/>
+  <text x="400" y="720" font-family="Arial" font-size="20" fill="#FFFFFF" text-anchor="middle">We don't make clothes.</text>
+  <text x="400" y="750" font-family="Arial" font-size="20" fill="#00FF66" text-anchor="middle">We engineer domination.</text>
+</svg>
