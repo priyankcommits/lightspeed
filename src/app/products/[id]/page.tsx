@@ -103,14 +103,14 @@ const relatedProducts = [
 export function generateMetadata({ params }) {
   const id = params.id;
   const product = Object.values(products).find(p => p.id === id);
-  
+
   if (!product) {
     return {
       title: 'Product Not Found | Lightspeed',
       description: 'The product you are looking for could not be found.',
     };
   }
-  
+
   return {
     title: `${product.name} | Lightspeed Performance Gear`,
     description: product.description.substring(0, 160),
@@ -187,7 +187,7 @@ export default function ProductDetailPage({ params }) {
                   className="object-cover"
                   priority
                 />
-                {product.isNew && (
+                {'isNew' in product && product.isNew && (
                   <div className="absolute top-4 left-4 bg-ls-neon text-ls-dark text-xs font-bold px-2 py-1 rounded-full">
                     NEW
                   </div>
